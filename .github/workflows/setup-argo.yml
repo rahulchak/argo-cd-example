@@ -18,7 +18,7 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
     - name: Apply Terraform Destroy
-      if: "contains(github.event.head_commit.message, 'build')"       
+      if: "contains(github.event.head_commit.message, 'destroy')"       
       id: apply-terraform-destroy
       run: sed -i "s/<project-id>/${{ secrets.PROJECT_ID }}/g" main.tf && terraform init && terraform destroy -auto-approve -var="project_id=${{ secrets.PROJECT_ID  }}"   
       env:
